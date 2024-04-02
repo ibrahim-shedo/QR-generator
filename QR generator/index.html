@@ -36,3 +36,52 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+//or exactly this html with tailwind style 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10 max-w-md p-6 bg-white rounded-md shadow-md">
+        <p class="mb-4 text-lg font-semibold">Enter your text or URL</p>
+        <input type="text" placeholder="Text or URL" id="qrText" class="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
+        <div id="imgbox" class="mb-4 hidden">
+            <img src="" id="qrImage" class="mx-auto">
+        </div>
+        <button onclick="generateQR()" class="w-full py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400">Generate QR code</button>
+    </div>
+
+    <script>
+        let imgbox = document.getElementById("imgbox");
+        let qrImage  = document.getElementById("qrImage");
+        let qrText  = document.getElementById("qrText");
+        
+        function generateQR(){
+            if (qrText.value.length > 0) {
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrText.value);
+                imgbox.classList.add("block");
+            }else{
+                qrText.classList.add("border-red-500");
+                setTimeout(()=>{
+                    qrText.classList.remove("border-red-500");
+                },1000);
+            }
+        }
+    </script>
+</body>
+</html>
+
